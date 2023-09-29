@@ -1,0 +1,87 @@
+<html>
+<body class="hold-transition register-page">
+    <div class="register-page">
+        <div class="register-logo">
+            <b>User </b> Registeration</a>
+        </div>
+        <div class="card card-outline card-red">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Register a new membership</p>
+                <form name="regForm" ng-submit="registeringUser.registerUserfunction()" novalidate>
+                    <div class="input-group mb-3" >
+                        <input type="text" name = "userName" class="form-control" placeholder="User name"
+                            ng-model="registeringUser.regFormData.username" ng-blur="registeringUser.checkUserNameUnique(regData)" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center text-danger" ng-show="!registeringUser.checkUsernameSuccess && !regForm.userName.$error.required">{{registeringUser.checkUsernameMsg}}</p>
+                    <p class="text-center text-success" ng-show="registeringUser.checkUsernameSuccess && !regForm.userName.$error.required">{{registeringUser.checkUsernameMsg}}</p>
+                    <p ng-show="(!regForm.userName.$pristine && regForm.userName.$error.required) || (regForm.$submitted && regForm.userName.$error.required)" class="text-center text-danger">User Name field is required</p>
+
+                    <div class="input-group mb-3">
+                        <input type="email" name="userEmail" class="form-control" placeholder="Email"
+                            ng-model="registeringUser.regFormData.email" ng-blur="registeringUser.checkEmailUnique(regData)" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center text-danger" ng-show="!registeringUser.checkemailSuccess && !regForm.userEmail.$error.required">{{registeringUser.checkemailMsg}}</p>
+                    <p class="text-center text-success" ng-show="registeringUser.checkemailSuccess && !regForm.userEmail.$error.required">{{registeringUser.checkemailMsg}}</p>
+                    <p ng-show="(!regForm.userEmail.$pristine && regForm.userEmail.$error.required) || (regForm.$submitted && regForm.userEmail.$error.required)" class="text-center text-danger">User Email field is required</p>
+
+                    <div class="input-group mb-3">
+                        <input type="password" name="userPassword" class="form-control" placeholder="Password"
+                            ng-model="registeringUser.regFormData.password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p ng-show="(!regForm.userPassword.$pristine && regForm.userPassword.$error.required) || (regForm.$submitted && regForm.userPassword.$error.required)" class="text-center text-danger">User Password field is required</p>
+
+                    <div class="row">
+
+
+                        <div class="col-12">
+                            <button type="submit" class="btn  btn-outline-info btn-block">Register</button>
+                        </div>
+
+                    </div>
+                </form>
+                <br>
+                <p class="text-center">
+                <a href="/" >I already have a membership</a>
+                </p>
+            </div>
+
+        </div>
+
+
+
+        <div class="row text-center" ng-show="registeringUser.loading">
+            <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+            <h2> &nbsp Loading...</h2>
+        </div>
+
+        <div class="row show-hide-message" ng-show="registeringUser.succMsg">
+            <div class="alert alert-success">{{registeringUser.succMsg}}</div>
+        </div>
+
+        <div class="row show-hide-message" ng-show="registeringUser.errMsg">
+            <div class="alert alert-danger">{{registeringUser.errMsg}}</div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>

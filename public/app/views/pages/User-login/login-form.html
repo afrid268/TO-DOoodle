@@ -1,0 +1,81 @@
+<html>
+
+<body class="hold-transition login-page">
+
+    <div class="login-page">
+        <div class="login-logo">
+            <b>User </b> Login</a>
+        </div>
+
+        <div class="card card-outline card-red">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+                <form name="loginForm" ng-submit="main.doLogin(loginData)" novalidate>
+
+                    <div class="input-group mb-3">
+                        <input type="text" name="userName" class="form-control" placeholder="User name"
+                            ng-model="main.loginData.username" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p ng-show="(!loginForm.userName.$pristine && loginForm.userName.$error.required) || (loginForm.$submitted && loginForm.userName.$error.required)" class="text-center text-danger">User Name field is required</p>
+
+                    <div class="input-group mb-3">
+                        <input type="password" name="userPassword" class="form-control" placeholder="Password"
+                            ng-model="main.loginData.password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <p ng-show="(!loginForm.userPassword.$pristine && loginForm.userPassword.$error.required) || (loginForm.$submitted && loginForm.userPassword.$error.required)" class="text-center text-danger">User Password field is required</p>
+
+                    <div class="row">
+
+                        <div class="col-3">
+
+                        </div>
+
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-outline-info btn-block">Sign In</button>
+                        </div>
+
+                    </div>
+                </form>
+
+                <p class="text-center">
+                    <a href="/register">Register a new membership</a>
+                </p>
+               
+            </div>
+
+
+        </div>
+
+        <div class="row text-center" ng-show="main.loading">
+            <h2 class="text-center">Loading...&nbsp</h2>
+                  <div class="text-center">
+                    <i class="fas fa-spinner fa-pulse fa-3x"></i>
+                  </div>
+        </div>
+
+        <div class="row show-hide-message" ng-show="main.succMsg">
+            <div class="alert alert-success">{{main.succMsg}}</div>
+        </div>
+
+        <div class="row show-hide-message" ng-show="main.errMsg">
+            <div class="alert alert-danger">{{main.errMsg}}</div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

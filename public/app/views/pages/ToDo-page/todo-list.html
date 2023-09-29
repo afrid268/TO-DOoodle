@@ -1,0 +1,202 @@
+<section class="content-header">
+    <div class="container-fluid">
+
+    <div class="row mb-2">
+
+    <div class="col-sm-6"> 
+            <h1>Plan Your Day</h1>
+    </div>
+
+    <div class="col-sm-6">
+        <ol class="float-sm-right">
+        <button type="button" class=" btn btn-block btn-outline-dark" data-toggle="modal" data-target="#modal-lg2" >Add New</button>
+        </ol>
+    </div>
+
+    </div>
+
+    <div class="row mb-2">
+        
+        <div class="col-md-12">
+            <div class="card card-outline card-red">
+            <div class="card-header p-2">
+            <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
+            </ul>
+            </div>
+            <div class="card-body">
+            <div class="tab-content">
+        
+            <div class="active tab-pane" id="activity">
+            
+                <section class="content">
+                    <div class="container-fluid">
+        
+                        <section class="content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="timeline" ng-show = "!TaskCRUD.listEmpty">     
+                                            <div ng-repeat="item in TaskCRUD.toDoList">
+                                                <i class="fas fa-check bg-dark"></i>
+                                                <div class="timeline-item">
+                                                    <span class="time"><i class="fas fa-clock"></i>{{item.showActivityTime}}</span>
+                                                    <h3 class="timeline-header">{{item.showActivityDate}}</h3>
+                                                    <div class="timeline-body">
+                                                      {{item.showActivityData}}
+                                                    </div>
+        
+                                                    <div class="timeline-footer col-4">
+                                                        <div class="row mb-2"> 
+                                                            <div class="col-lg-4">
+                                                                <button type="button" class="btn btn-block btn-outline-primary btn-xs" data-toggle="modal" data-target="#modal-lg3" ng-click="TaskCRUD.editTaskFunction(item.activityId)"><ion-icon name="create"></ion-icon> 
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <button type="button" class="btn btn-block btn-outline-danger btn-xs" ng-click="TaskCRUD.deleteTaskFunction(item.activityId)"><ion-icon name="trash"></ion-icon>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div ng-show="TaskCRUD.listEmpty">
+                                                <div class="callout callout-warning">
+                                                    <h5>Hurrayy !!! looks like you are all caught up for today.</h5>
+                                                    <p>Click "Add New" for adding new to-do task to plan out your day.</p>
+                                                </div>
+                                            </div>
+        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+        
+                        
+                    </div>
+                </section>
+        
+            </div>
+        
+            </div>
+            
+            </div>
+            
+            </div>
+            
+            </div>
+
+
+    </div>
+
+    </div>
+   
+</section>
+    
+    <section class="content">
+    <div class="container-fluid">
+    <div class="row">
+        
+
+
+    </div>
+    </section> 
+
+
+
+       <!--Add ToDo task Modal -->
+       <div class="modal fade" id="modal-lg2">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+         <div class="modal-header">
+        <h4 class="modal-title">Add task</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+
+     <form name="taskForm" ng-submit="TaskCRUD.createTask(main.userId)" novalidate>
+        <div class="modal-body">
+       
+            <div class="row">
+                <div class="col-12">
+                    <label>Provide your task detail in the text area below</label>
+                    <textarea class="form-control" rows="5" placeholder="Enter the task to be done" id="myTextArea" name="taskdetail"
+                    ng-model="TaskCRUD.TaskFormData.taskDetail" required></textarea>
+                </div>   
+            </div>
+
+        </div>
+
+        <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-danger swalDefaultError" ng-click="TaskCRUD.closeModal()">Close</button>
+        <button type="submit" class="btn btn-primary swalDefaultSuccess" ng-click="TaskCRUD.toasterFunction()" ng-disabled="taskForm.taskdetail.$error.required ">Save Task</button>
+        </div>
+
+    </form>
+
+        </div>
+        </div>
+    </div>
+
+      <!--Edit ToDo task Modal -->
+      <div class="modal fade" id="modal-lg3">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+         <div class="modal-header">
+        <h4 class="modal-title">Edit task</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+
+     <form name="editTaskForm" ng-submit="TaskCRUD.updateTask(taskIdforUpdate)" novalidate>
+        <div class="modal-body">
+       
+            <div class="row">
+                <div class="col-12">
+                    <label>Provide your correction to the task detail in the text area below</label>
+                    <textarea class="form-control" rows="5" placeholder="Enter the task to be done" id="myTextArea" name="taskdetail"
+                    ng-model="taskTobeEdited" required></textarea>
+                </div>   
+            </div>
+
+        </div>
+
+        <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-danger swalDefaultError" ng-click="TaskCRUD.closeEditModal()">Close</button>
+        <button type="submit" class="btn btn-primary swalDefaultSuccess" ng-click="TaskCRUD.toasterFunction()" ng-disabled="editTaskForm.taskdetail.$error.required ">Edit Task</button>
+        </div>
+
+    </form>
+
+        </div>
+        </div>
+    </div>
+
+
+
+     <!-- modals pop ups for deleting task--> 
+ <div class="modal fade" id="modal-danger" data-backdrop="static">
+    <div class="modal-dialog">
+    <div class="modal-content bg-danger">
+    <div class="modal-header">
+    <h4 class="modal-title">{{TaskCRUD.modalHeader}}</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="TaskCRUD.closeModal()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+    <p>{{TaskCRUD.modalContent}}</p>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" ng-click="TaskCRUD.cancelDelete()">No</button>
+        <button type="button" class="btn btn-outline-light swalDefaultInfo" ng-click="TaskCRUD.confirmDelete()">Yes</button>
+    </div>
+    </div>
+    
+    </div>
+    
+    </div>
